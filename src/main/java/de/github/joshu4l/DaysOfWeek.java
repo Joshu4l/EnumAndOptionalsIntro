@@ -26,6 +26,7 @@ public enum DaysOfWeek {
     SATURDAY,
     SUNDAY;
 
+
     public String progressWithinWeek() {
 
         if (this != DaysOfWeek.SATURDAY && this !=DaysOfWeek.SUNDAY) {
@@ -33,7 +34,6 @@ public enum DaysOfWeek {
         } else {
             return "Wochenende!";
         }
-
     }
 
 }

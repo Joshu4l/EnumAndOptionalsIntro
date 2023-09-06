@@ -38,6 +38,5 @@ public record Person(
         Gender gender,
         DaysOfWeek favoriteDay
 
-
 ) { }
 

@@ -1,6 +1,6 @@
 package de.github.joshu4l;
 
-//TODO:
+//TO-DO:
 /*
     BONUSAUFGABE:
 

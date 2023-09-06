@@ -38,6 +38,7 @@ public class PersonRepository {
 
     private Map<String, Person> persons = new HashMap<>();
 
+
     // CONSTRUCTORS
     public PersonRepository(){
         // Default Constructor
@@ -65,7 +66,7 @@ public class PersonRepository {
 
             // use the Value (in this case the person object) of each KVP, ...
             Person person = entry.getValue();
-            if (person.name().equals(name)) {return Optional.ofNullable(person);}
+            if (person.name().equals(name)) {return Optional.of(person);}
 
         } return Optional.empty();
     }
