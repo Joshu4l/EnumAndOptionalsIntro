@@ -20,4 +20,3 @@ public record Person(
         String name,
         DaysOfWeek favoriteDay
 ) { }
-
