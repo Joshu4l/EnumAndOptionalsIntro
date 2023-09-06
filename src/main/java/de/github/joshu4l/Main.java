@@ -16,6 +16,22 @@ package de.github.joshu4l;
                dann gib den Namen und den Lieblings-Wochentag auf der Konsole aus.
  */
 
+//TODO:
+/*
+    BONUSAUFGABE:
+
+    - Erweitere den Record Person um ein Enum Gender (Männlich, Weiblich, Divers).
+
+    - Schreibe eine Methode im PersonRepository, die die Anzahl der Personen nach Geschlecht zählt
+      und die Ergebnisse ausgibt.
+
+    - Füge eine Methode im PersonRepository hinzu, die eine Person anhand ihres Namens sucht und zurückgibt.
+      Die Methode soll ein Optional zurückgeben.
+
+    - Schreibe eine Methode im PersonRepository, die alle Personen anhand ihres Lieblings-Wochentags sucht
+      und zurückgibt. Die Methode solle Liste zurückgeben.
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -30,9 +46,9 @@ public class Main {
         System.out.println("\n");
 
         // Instantiate a few person objects, ...
-        Person my1stPerson = new Person("P-0001", "Anne", DaysOfWeek.SATURDAY);
-        Person my2ndPerson = new Person("P-0002", "Diana", DaysOfWeek.SUNDAY);
-        Person my3rdPerson = new Person("P-0003", "josh", DaysOfWeek.FRIDAY);
+        Person my1stPerson = new Person("P-0001", "Anne", Gender.FEMALE, DaysOfWeek.SATURDAY);
+        Person my2ndPerson = new Person("P-0002", "Diana", Gender.FEMALE, DaysOfWeek.SUNDAY);
+        Person my3rdPerson = new Person("P-0003", "josh", Gender.MALE, DaysOfWeek.FRIDAY);
         // ... put them into a Map, ...
         Map<String, Person> personsToBeAdded = new HashMap<>();
         personsToBeAdded.put(my1stPerson.id(), my1stPerson);
@@ -46,16 +62,36 @@ public class Main {
             Now, query for a specific person within the PersonRepo
             BUT: Consider, that the return type will be an optional!
          */
-        Optional<Person> optionalPerson = myPersonRepo.getPersonById("P-0001");
+        Optional<Person> optionalPerson1 = myPersonRepo.getPersonById("P-0001");
 
         System.out.println("*** Your Query Results: ***");
 
         // ... Therefor, check if the Optional that was returned is even populated:
-        if (optionalPerson.isPresent()) {
+        if (optionalPerson1.isPresent()) {
             // if so, print some of his / her credentials:
-            Person populatedPersonObject = optionalPerson.get();
+            Person populatedPersonObject = optionalPerson1.get();
             System.out.println("The name of the person you searched is:  " + populatedPersonObject.name());
             System.out.println("His/her favorite day of the week is:     " + populatedPersonObject.favoriteDay());
+        } else {
+            // otherwise state that such a person couldn't be found
+            System.out.println("No such Person found");
+        }
+
+        // BONUS:
+        System.out.println(myPersonRepo.countPersonsByGender());
+
+        /*
+            Now, query for a specific person within the PersonRepo
+            BUT: Consider, that the return type will be an optional!
+         */
+        Optional<Person> optionalPerson2 = myPersonRepo.getPersonByName("Anne");
+
+        System.out.println("*** Your Query Results: ***");
+        // ... Therefor, check if the Optional that was returned is even populated:
+        if (optionalPerson2.isPresent()) {
+            // if so, print it:
+            Person populatedPersonObject = optionalPerson2.get();
+            System.out.println("Matching reults for your search:  " + populatedPersonObject);
         } else {
             // otherwise state that such a person couldn't be found
             System.out.println("Person nicht vorhanden");

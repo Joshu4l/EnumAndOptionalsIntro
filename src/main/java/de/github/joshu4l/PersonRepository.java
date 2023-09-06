@@ -16,9 +16,23 @@ package de.github.joshu4l;
                dann gib den Namen und den Lieblings-Wochentag auf der Konsole aus.
  */
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+//TODO:
+/*
+    BONUSAUFGABE:
+
+    - Erweitere den Record Person um ein Enum Gender (Männlich, Weiblich, Divers).
+
+    - Schreibe eine Methode im PersonRepository, die die Anzahl der Personen nach Geschlecht zählt
+      und die Ergebnisse ausgibt.
+
+    - Füge eine Methode im PersonRepository hinzu, die eine Person anhand ihres Namens sucht und zurückgibt.
+      Die Methode soll ein Optional zurückgeben.
+
+    - Schreibe eine Methode im PersonRepository, die alle Personen anhand ihres Lieblings-Wochentags sucht
+      und zurückgibt. Die Methode solle Liste zurückgeben.
+ */
+
+import java.util.*;
 
 public class PersonRepository {
 
@@ -41,6 +55,48 @@ public class PersonRepository {
         } else {
             return Optional.empty();
         }
+    }
+
+
+    public Optional<Person> getPersonByName(String name) {
+
+        // Iterate over the whole Map by using the .entrySet()
+        for (Map.Entry<String, Person> entry : persons.entrySet()) {
+
+            // use the Value (in this case the person object) of each KVP, ...
+            Person person = entry.getValue();
+            if (person.name().equals(name)) {return Optional.ofNullable(person);}
+
+        } return Optional.empty();
+    }
+
+
+    public Map<Gender, Integer> countPersonsByGender (){
+
+        // Create a Hashmap to be filled by the loop down below
+        Map<Gender, Integer> genderCountResult = new HashMap<>();
+
+        // Prepare a counter variable for each Gender
+        int femaleCount = 0;
+        int maleCount = 0;
+        int diverseCount = 0;
+
+        // Iterate over the whole Map by using the .entrySet()
+        for (Map.Entry<String, Person> entry : persons.entrySet()) {
+
+            // use the Value (in this case the person object) of each KVP, ...
+            Person person = entry.getValue();
+
+            // check the respective gender of the person and increment the corresponding counter variable
+            if (person.gender().equals(Gender.FEMALE)) {femaleCount += 1;}
+            else if (person.gender().equals(Gender.MALE)) {maleCount += 1;}
+            else {diverseCount +=1;}
+        }
+
+        genderCountResult.put(Gender.FEMALE, femaleCount);
+        genderCountResult.put(Gender.MALE, maleCount);
+        genderCountResult.put(Gender.DIVERSE, diverseCount);
+        return genderCountResult;
     }
 
 
